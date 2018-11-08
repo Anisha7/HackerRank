@@ -13,7 +13,9 @@ def sockMerchant(n, ar):
     i = 0
     while (i < len(ar)):
         word = ar.pop(i)
-        print(ar)
+        if (len(ar) < 30): 
+            print(ar)
+            print(i)
         found = False
         for j in range(len(ar)):
             if (word == ar[j]):
@@ -23,6 +25,8 @@ def sockMerchant(n, ar):
                 break
         if found == False: 
             i += 1
+        else:
+            i = 0
     return pairs
 
 
