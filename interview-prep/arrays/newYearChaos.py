@@ -18,7 +18,7 @@ def swap(q, i, j):
     q[i],q[j] = q[j],q[i]
     return q
 
-# O(1) because we can't make more than 2 swaps
+# O(N) because of index function
 def place(q, start, i):
     
     # find q[i] in start array
@@ -42,8 +42,8 @@ def place(q, start, i):
     
     return (count, start)
 
-# Worst: O(N) where N = len(q)
-# Best: O(1) where the first element requires 2+ swaps
+# Worst: O(N**2) where N = len(q)
+# Best: O(N) where the first element requires 2+ swaps
 def minimumBribes(q):
     count = 0
     # starting position
