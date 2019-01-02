@@ -60,6 +60,10 @@ def minimumBribes(q):
             break
         count += tup[0]
         start = tup[1]
+
+        # if equal already, break out of loop
+        if (q == start):
+            break
     
     if (count != None):
         print(count)
