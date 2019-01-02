@@ -15,9 +15,7 @@ import sys
 def swap(q, i, j):
     if (j >= len(q)):
         return q
-    temp = q[i]
-    q[i] = q[j]
-    q[j] = temp
+    q[i],q[j] = q[j],q[i]
     return q
 
 # O(1) because we can't make more than 2 swaps
