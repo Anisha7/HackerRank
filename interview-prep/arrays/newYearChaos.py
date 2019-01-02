@@ -23,6 +23,7 @@ def place(q, start, i):
     
     # find q[i] in start array
     index = start.index(q[i])
+    
     # check count
     # optimization: if too chaotic, function will exit
     count = abs(index - i)
