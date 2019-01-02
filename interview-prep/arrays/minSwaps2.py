@@ -21,43 +21,43 @@ def minimumSwaps2(arr):
         # prevent index out of range
         if (i >= len(arr)):
             i = 0
-        # print(arr)
-        # print('count: ',count)
-        # print('i: ', i)
+        
+        # if in the right place
         if (arr[i] == i+1):
             i += 1
             continue
+        
         # if i+3 is the right place, move it there
-        if (arr[i] == i+3):
+        elif (arr[i] == i+3):
             # print('arr[i] == i+3')
             arr = swap(arr, i, i+2)
             count += 1
 
         # if i+2 is the right place, move it there
-        if (arr[i] == i+2):
+        elif (arr[i] == i+2):
             # print('arr[i] == i+2')
             arr = swap(arr, i, i+1)
             count += 1
 
         # if i is the right place for arr[i+3]
-        if (i+2 < len(arr) and arr[i+2] == i+1):
+        elif (i+2 < len(arr) and arr[i+2] == i+1):
             # print('arr[i+2] == i+1')
             arr = swap(arr, i, i+2)
             count += 1
         
         # if i is the right place for arr[i+2]
-        if (i+1 < len(arr) and arr[i+1] == i+1):
+        elif (i+1 < len(arr) and arr[i+1] == i+1):
             # print('arr[i+1] == i+1')
             arr = swap(arr, i, i+1)
             count += 1
 
+        # increment index
         i += 1
         
-    # print(arr)
-    # print('COUNT')
     return count
 
 if __name__ == '__main__':
     print(minimumSwaps2([7,1,3,2,4,5,6])) #5
     print(minimumSwaps2([4,3,1,2])) # 3
     print(minimumSwaps2([2,3,4,1,5])) # 3
+    print(minimumSwaps2([2,3,4,1,5,7,9,6,8,10,14,12,11,13])) 
