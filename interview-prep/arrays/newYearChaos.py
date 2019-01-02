@@ -3,13 +3,15 @@
 # needed to get the queue into its final state. 
 # Print Too chaotic if the state is invalid, i.e. 
 # it requires a person to have bribed more than  people.
+#!/bin/python3
+
 import math
 import os
 import random
 import re
 import sys
 
-
+# O(1)
 def swap(q, i, j):
     if (j >= len(q)):
         return q
@@ -17,32 +19,33 @@ def swap(q, i, j):
     q[i] = q[j]
     q[j] = temp
     return q
-    
+
+# O(1) because we can't make more than 2 swaps
 def place(q, start, i):
     
-    # find q[i] in start
+    # find q[i] in start array
     index = start.index(q[i])
-    # place it at i and count swaps
-    count = 0
-    dx = 1
-    if (i < index):
-        dx = -1
-    while (q[i] != start[i]):
-        # check for index errors
-        if (index + dx < 0 or index + dx >= len(q)):
-            print('index error, exiting loop, status: (q, q[i], start[i]) ')
-            print(q, q[i], start[i])
-            break
-        # swap places with index and index +/- 1
-        start = swap(start, index, index+dx)
-        count += 1
-        index += dx
+    # check count
+    # optimization: if too chaotic, function will exit
+    count = abs(index - i)
     if (count > 2):
         print('Too chaotic')
         count = None
+        return (count, start)
+
+    # alter start array
+    dx = 1
+    if (i < index):
+        dx = -1
+    while (i != index):
+        # swap places with index and index + dx
+        start = swap(start, index, index+dx) # O(1)
+        index += dx
+    
     return (count, start)
 
-# Complete the minimumBribes function below.
+# Worst: O(N) where N = len(q)
+# Best: O(1) where the first element requires 2+ swaps
 def minimumBribes(q):
     count = 0
     # starting position
@@ -50,7 +53,8 @@ def minimumBribes(q):
     
     # check each element in list and place it at the right location
     for i in range(len(q)):
-        tup = place(q, start, i)
+        tup = place(q, start, i) # O(1)
+        # if too chaotic, exit loop and return
         if (tup[0] == None):
             count = None
             break
@@ -59,12 +63,21 @@ def minimumBribes(q):
     
     if (count != None):
         print(count)
-    return count
+    return
+
+# if __name__ == '__main__':
+#     t = int(input())
+
+#     for t_itr in range(t):
+#         n = int(input())
+
+#         q = list(map(int, input().rstrip().split()))
+#         minimumBribes(q)
 
 if __name__ == '__main__':
-    q = [2, 1, 5, 3, 4]
+    q = [2, 1, 5, 3, 4, 6, 7, 8, 10, 9, 12, 11]
     print('RESULT: ')
-    print(minBribes(q))
+    print(minimumBribes(q))
     q = [2, 5, 1, 3, 4]
     print('RESULT: ')
-    print(minBribes(q))
+    print(minimumBribes(q))
