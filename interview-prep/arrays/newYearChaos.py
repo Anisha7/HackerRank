@@ -23,7 +23,6 @@ def place(q, start, i):
     
     # find q[i] in start array
     index = start.index(q[i])
-    
     # check count
     # optimization: if too chaotic, function will exit
     count = abs(index - i)
@@ -67,16 +66,7 @@ def minimumBribes(q):
     if (count != None):
         print(count)
     return
-
-# if __name__ == '__main__':
-#     t = int(input())
-
-#     for t_itr in range(t):
-#         n = int(input())
-
-#         q = list(map(int, input().rstrip().split()))
-#         minimumBribes(q)
-
+    
 if __name__ == '__main__':
     q = [2, 1, 5, 3, 4, 6, 7, 8, 10, 9, 12, 11]
     print('RESULT: ')
@@ -84,3 +74,6 @@ if __name__ == '__main__':
     q = [2, 5, 1, 3, 4]
     print('RESULT: ')
     print(minimumBribes(q))
+    q = [1, 2, 5, 3, 7, 8, 6, 4]
+    print('RESULT: ')
+    print(minimumBribes(q)) # 7
