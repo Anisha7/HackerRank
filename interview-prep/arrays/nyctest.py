@@ -48,11 +48,28 @@ def minimumBribes(q):
 if __name__ == '__main__':
     print("FORWARDS")
     q = [2, 1, 5, 3, 4, 6, 7, 8, 10, 9, 12, 11]
+    result = minimumBribes(q)
     print('RESULT: ')
-    print(minimumBribes(q))
+    print(result)
+    if (result == 5):
+        print('-----*PASSED TEST 1*-----')
+    else:
+        print('!!!!-----*FAILED TEST 1*-----!!!!')
+
     q = [2, 5, 1, 3, 4]
+    result = minimumBribes(q)
     print('RESULT: ')
-    print(minimumBribes(q)) # 3
+    print(result)
+    if (result == None):
+        print('-----*PASSED TEST 2*-----')
+    else:
+        print('!!!!-----*FAILED TEST 2*-----!!!!')
+
     q = [1, 2, 5, 3, 7, 8, 6, 4]
+    result = minimumBribes(q)
     print('RESULT: ')
-    print(minimumBribes(q)) # 7
+    print(result) # 7
+    if (result == 7):
+        print('-----*PASSED TEST 3*-----')
+    else:
+        print('!!!!-----*FAILED TEST 3*-----!!!!')
