@@ -14,7 +14,7 @@ def find(L, item):
             return True
     return False
 
-def getWaysH(n,c,options, depth = 0, curr = []):
+def getWaysH(n,c,options, depth = 0, curr = [], memo = dict()):
     # print('depth: ', depth)
     # print('options: ', options)
     # print('curr: ', curr)
@@ -40,26 +40,67 @@ def getWaysH(n,c,options, depth = 0, curr = []):
                 
     return
 
+def getWaysH2(n,c,memo = dict()):
+    
+    if n < 0: return 0
+    if n == 0: return 1
+    if (n,len(c)) in memo.keys(): return memo[(n,len(c))]
+    
+    else:
+        total = 0
+        # for all options
+        for i in range(len(c)): # O(c) c => # of coins
+            coin = c[i]
+            if coin > n:
+                continue
+            else:
+                result = getWaysH2(n-coin, c[i:], memo)
+                if result > 0: 
+                    total += result
+                
+        memo[(n, len(c))] = total        
+        return total
+
 
 # Complete the getWays function below.
 def getWays(n, c):
     options = []
     c.sort()
-    # remove unnecessary options
-    coins = []
-    for coin in c:
-        if (coin <= n):
-            coins.append(coin)
-        else:
-            break
-
-    getWaysH(n, coins, options)
+    
+    getWaysH(n, c, options)
     print('in result: ',options)
     if options == None:
         return 0
     return len(options)
 
+
+# Complete the getWays function below.
+memoizing_dict = dict()
+
+# Complete the getWays function below.
+def getWaysCOP(n, c):
+    global memoizing_dict
+    if n < 0:
+        return 0
+    elif n == 0:
+        return 1
+    elif (n,len(c)) in memoizing_dict.keys():
+        return memoizing_dict[(n,len(c))]
+    else:
+        cum_sum = 0
+        for c_index in range(len(c)):
+            c_item = c[c_index]
+            if c_item > n:
+                continue
+            else:
+                result = getWaysCOP(n-c_item, c[c_index:])
+                if result > 0:
+                    cum_sum += result
+        memoizing_dict[(n,len(c))] = cum_sum
+        return cum_sum
+
 if __name__ == '__main__':
-    print(getWays(4, [1,2,3])) # 4
-    print(getWays(10, [2,5,6])) # 5
-    # print(getWays(219, [36, 10, 42, 7, 50, 1, 49, 24, 37, 12, 34, 13, 39, 18, 8, 29, 19, 43, 5, 44, 28, 23, 35, 26]))
+    # print(getWaysCOP(4, [1,2,3])) # 4
+    # print(getWaysCOP(10, [2,5,6])) # 5
+    print(getWaysCOP(219, [36, 10, 42, 7, 50, 1, 49, 24, 37, 12, 34, 13, 39, 18, 8, 29, 19, 43, 5, 44, 28, 23, 35, 26]))
+    print(getWaysH2(219, [36, 10, 42, 7, 50, 1, 49, 24, 37, 12, 34, 13, 39, 18, 8, 29, 19, 43, 5, 44, 28, 23, 35, 26]))
