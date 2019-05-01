@@ -22,19 +22,23 @@ def saveThePrisoner(n, m, s):
 def saveThePrisonerOptimized(n, m, s):
     if (n == m):
         return n
-    offset = m%n
-    if m < n:
-        offset = m
-    elif offset == 0:
-        offset = 0
-        # m is a multiple of n, what should we do??
-    print("offset: %d"%offset)
-    return s + offset - 1
+    # offset = m%n
+    
+    # result = s + offset - 1
+    result = (m + s - 1)%n
+    if result > n:
+        return result - n
+    # return result 
+    if result != 0:
+        return result
+    else: 
+        return n
 
 # print(saveThePrisonerOptimized(5,2,1)) # 2
 # print(saveThePrisonerOptimized(7,19,2)) # 6
 # print(saveThePrisonerOptimized(3,7,3)) # 3
 # print(saveThePrisonerOptimized(999999999, 999999999, 1))
+    
 
 def main():
     f = open('test.py', 'r')
@@ -65,7 +69,13 @@ def main():
             falseResults.append(i)
     
     for i in falseResults:
-        print("TEST VALUES: %s"%problems[i])
+        problem = problems[i]
+        print("TEST VALUES: %s"%problem)
+        testvals = problem.split()
+        n = int(testvals[0])
+        m = int(testvals[1])
+        s = int(testvals[2])
+        print(saveThePrisonerOptimized(n,m,s))
         print("MY RESULT: %s"%calculatedResults[i])
         print("EXPECTED RESULT: %s"%solutions[i])
         print("\n")
